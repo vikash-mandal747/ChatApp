@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="registerDiv">
+        <input id="userName" type="text" placeholder="Enter Name to Register" />
+        <button id="registerBtn">Register</button>
+    </div>
+</body>
+<script type="module">
+    //the below line is installation of socket.io in FE
+    import { io } from "https://cdn.socket.io/4.8.1/socket.io.esm.min.js";
+    // the below line is connecting to our BE server
+    const socket = io('http://localhost:9000');
+
+    //register event will be done here
+    document.getElementById("registerBtn").addEventListener("click", () => {
+        let name = document.getElementById("userName").value;
+        console.log(name);
+        if (name == "") {
+            alert("name cannot be empty")
+        } else {
+            socket.emit("regName", name)
+        }
+
+    })
+</script>
+
+</html>
